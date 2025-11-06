@@ -196,6 +196,31 @@
       margin-bottom: 10px;
       cursor: pointer;
     }
+
+    .audio-button {
+          background-color: skyblue;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 13px;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .audio-button:hover {
+          background-color: #7dd3fc;
+          transform: scale(1.1);
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .audio-button:active {
+          transform: scale(0.95);
+      }
     
     /* Tablet styles */
     @media (max-width: 768px) {
@@ -413,6 +438,43 @@
   </style>
 </head>
 <body>
+
+  <audio id="audio-zen" preload="auto">
+        <source src="./audioUD2/怎.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-yang" preload="auto">
+        <source src="./audioUD2/样.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-shi1" preload="auto">
+        <source src="./audioUD2/是.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-lao" preload="auto">
+        <source src="./audioUD2/老.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-shi2" preload="auto">
+        <source src="./audioUD2/师.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-xue" preload="auto">
+        <source src="./audioUD2/学.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-sheng" preload="auto">
+        <source src="./audioUD2/生.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-zai" preload="auto">
+        <source src="./audioUD2/再.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-jian" preload="auto">
+        <source src="./audioUD2/见.m4a" type="audio/mp4">
+    </audio>
+     <audio id="audio-jin" preload="auto">
+        <source src="./audioUD2/今.m4a" type="audio/mp4">
+    </audio>
+    <audio id="audio-nian" preload="auto">
+        <source src="./audioUD2/年.m4a" type="audio/mp4">
+    </audio>
+        <audio id="audio-sui" preload="auto">
+        <source src="./audioUD2/岁.m4a" type="audio/mp4">
+    </audio>
   <div class="container">
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ Menú de Caracteres</button>
     
@@ -425,6 +487,9 @@
       <div id="current-word"></div>
       
       <div class="character-display-section">
+          <button class="audio-button" id="audio-button" onclick="playAudio()">
+            🔊
+          </button>
         <div id="character-target-div"></div>
         <button class="replay-button" onclick="replayAnimation()">
           ↻ Repetir animación
@@ -456,18 +521,18 @@
 
   <script>
     const characters = [
-      { char: '怎', pinyin: 'zěn', spanish: 'cómo (parte de zěnme)' },
-      { char: '样', pinyin: 'yàng', spanish: 'manera (parte de zěnmeyàng)' },
-      { char: '是', pinyin: 'shì', spanish: 'ser' },
-      { char: '老', pinyin: 'lǎo', spanish: 'viejo' },
-      { char: '师', pinyin: 'shī', spanish: 'maestro (parte de lǎoshī)' },
-      { char: '学', pinyin: 'xué', spanish: 'estudiar' },
-      { char: '生', pinyin: 'shēng', spanish: 'estudiante/nacer (parte de xuésheng)' },
-      { char: '再', pinyin: 'zài', spanish: 'de nuevo' },
-      { char: '见', pinyin: 'jiàn', spanish: 'ver (parte de zàijiàn)' },
-      { char: '今', pinyin: 'jīn', spanish: 'ahora, presente (parte de jīnnián)' },
-      { char: '年', pinyin: 'nián', spanish: 'año de fecha (parte de jīnnián)' },
-      { char: '岁', pinyin: 'suì', spanish: 'año de edad' }
+      { char: '怎', pinyin: 'zěn', spanish: 'cómo (parte de zěnme)', audioId:"audio-zen" },
+      { char: '样', pinyin: 'yàng', spanish: 'manera (parte de zěnmeyàng)', audioId:"audio-yang" },
+      { char: '是', pinyin: 'shì', spanish: 'ser', audioId:"audio-shi1" },
+      { char: '老', pinyin: 'lǎo', spanish: 'viejo', audioId:"audio-lao" },
+      { char: '师', pinyin: 'shī', spanish: 'maestro (parte de lǎoshī)', audioId:"audio-shi2" },
+      { char: '学', pinyin: 'xué', spanish: 'estudiar', audioId:"audio-xue" },
+      { char: '生', pinyin: 'shēng', spanish: 'estudiante/nacer (parte de xuésheng)', audioId:"audio-sheng" },
+      { char: '再', pinyin: 'zài', spanish: 'de nuevo', audioId:"audio-zai" },
+      { char: '见', pinyin: 'jiàn', spanish: 'ver (parte de zàijiàn)', audioId:"audio-jian" },
+      { char: '今', pinyin: 'jīn', spanish: 'ahora, presente (parte de jīnnián)', audioId:"audio-jin" },
+      { char: '年', pinyin: 'nián', spanish: 'año de fecha (parte de jīnnián)', audioId:"audio-nian" },
+      { char: '岁', pinyin: 'suì', spanish: 'año de edad', audioId:"audio-sui" }
     ];
 
     let currentIndex = 0;
@@ -665,6 +730,14 @@
         showCharacter(currentIndex);
       }, 250);
     });
+
+      function playAudio() {
+            const audioId = characters[currentIndex].audioId;
+            const audio = document.getElementById(audioId);
+            if (audio) {
+                audio.play();
+            }
+        }
   </script>
 </body>
 </html>
