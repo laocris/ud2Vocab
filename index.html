@@ -8,6 +8,10 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap');
     
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
       font-family: 'Noto Serif SC', serif;
       display: flex;
@@ -21,7 +25,7 @@
       position: relative;
       overflow-x: hidden;
     }
-  
+    
     body::before {
       content: "";
       position: fixed;
@@ -242,6 +246,10 @@
       background: white;
       border-radius: 10px;
       box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
     }
     
     #character-canvas {
@@ -251,6 +259,8 @@
       background: linear-gradient(to bottom right, #fffaf0, #fff);
       touch-action: none;
       box-shadow: 0 2px 10px rgba(139, 69, 19, 0.2);
+      max-width: 100%;
+      height: auto;
     }
     
     .canvas-controls {
@@ -260,6 +270,8 @@
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
+      width: 100%;
+      padding: 0 10px;
     }
     
     .canvas-controls button {
@@ -273,6 +285,8 @@
       font-family: 'Noto Serif SC', serif;
       transition: all 0.3s ease;
       box-shadow: 0 2px 8px rgba(70, 130, 180, 0.3);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     
     .canvas-controls button:hover {
@@ -298,6 +312,7 @@
       background: #faf8f3;
       border-radius: 20px;
       border: 1px solid #8b4513;
+      flex-shrink: 0;
     }
     
     .stroke-control input {
@@ -495,7 +510,6 @@
       text-decoration: underline;
     }
     
-   
     @media (max-width: 768px) {
       body {
         padding: 15px;
@@ -522,6 +536,11 @@
       .practice-section {
         padding: 15px;
         max-width: 100%;
+        width: calc(100% - 20px);
+      }
+
+      .canvas-container {
+        padding: 10px;
       }
       
       #character-canvas {
@@ -548,6 +567,26 @@
       .info {
         align-items: center;
         text-align: center;
+      }
+
+      .canvas-controls {
+        gap: 8px;
+        padding: 0 5px;
+      }
+
+      .canvas-controls button {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .stroke-control {
+        width: 100%;
+        justify-content: center;
+        padding: 6px 10px;
+      }
+
+      .stroke-control input {
+        width: 80px;
       }
     }
     
@@ -595,6 +634,7 @@
         flex-direction: column;
         gap: 5px;
         min-width: auto;
+        width: calc(100% - 20px);
       }
 
       .hanzi {
@@ -623,43 +663,64 @@
       }
       
       .practice-section {
-        padding: 15px;
+        padding: 12px;
         margin-top: 15px;
+        width: calc(100% - 10px);
       }
       
       .practice-section h3 {
         font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .canvas-container {
+        padding: 8px;
+        margin: 10px 0;
       }
       
       #character-canvas {
-        width: 200px !important;
-        height: 200px !important;
+        width: 180px !important;
+        height: 180px !important;
       }
       
       .canvas-controls {
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
+        padding: 0;
+        width: 100%;
       }
       
       .canvas-controls button {
         width: 100%;
-        padding: 10px;
+        padding: 8px;
+        font-size: 12px;
       }
       
       .stroke-control {
         width: 100%;
         justify-content: center;
+        padding: 6px 10px;
+      }
+
+      .stroke-control input {
+        width: 70px;
+      }
+
+      .stroke-control label {
+        font-size: 13px;
       }
       
       .nav-buttons {
         flex-wrap: wrap;
         gap: 8px;
+        width: 100%;
+        padding: 0 5px;
       }
       
       .nav-buttons button {
         flex: 1;
         min-width: 120px;
-        padding: 12px 15px;
+        padding: 10px 12px;
         font-size: 14px;
       }
       
@@ -686,6 +747,7 @@
         padding: 8px 15px;
         flex-direction: column;
         gap: 3px;
+        width: 100%;
       }
 
       .hanzi {
@@ -710,30 +772,75 @@
         padding: 6px 12px;
       }
       
-      #character-canvas {
-        width: 180px !important;
-        height: 180px !important;
-      }
-      
       .practice-section {
         padding: 10px;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
       }
       
       .practice-section h3 {
         font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      .canvas-container {
+        padding: 5px;
+      }
+      
+      #character-canvas {
+        width: 160px !important;
+        height: 160px !important;
+      }
+      
+      .canvas-controls {
+        gap: 5px;
       }
       
       .canvas-controls button {
-        font-size: 13px;
-        padding: 8px;
+        font-size: 11px;
+        padding: 7px;
+      }
+
+      .stroke-control {
+        padding: 5px 8px;
+      }
+
+      .stroke-control input {
+        width: 60px;
+      }
+
+      .stroke-control label {
+        font-size: 12px;
       }
       
       .nav-buttons button {
         font-size: 13px;
-        padding: 10px 12px;
+        padding: 8px 10px;
+        min-width: 100px;
       }
     }
+    
+    @media (max-width: 350px) {
+      #character-canvas {
+        width: 140px !important;
+        height: 140px !important;
+      }
+      
+      .canvas-controls button {
+        font-size: 10px;
+        padding: 6px;
+      }
 
+      .stroke-control {
+        font-size: 11px;
+      }
+
+      .stroke-control input {
+        width: 50px;
+      }
+    }
+    
     @media (max-width: 900px) and (orientation: landscape) {
       body {
         padding: 10px;
@@ -775,13 +882,27 @@
         padding: 6px 12px;
       }
       
+      .practice-section {
+        padding: 10px;
+        max-width: 350px;
+      }
+
+      .canvas-container {
+        padding: 8px;
+      }
+      
       #character-canvas {
         width: 180px !important;
         height: 180px !important;
       }
-      
-      .practice-section {
-        padding: 10px;
+
+      .canvas-controls {
+        gap: 6px;
+      }
+
+      .canvas-controls button {
+        padding: 7px 10px;
+        font-size: 12px;
       }
       
       .mobile-menu-toggle {
